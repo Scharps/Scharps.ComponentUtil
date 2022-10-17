@@ -2,16 +2,11 @@
 public struct BindableType<T>
 {
     private List<Func<T, Task>> _callbacks = new();
-    private T? _value;
+    private T? _value = default;
 
     public BindableType(T value)
     {
         _value = value;
-    }
-
-    public BindableType()
-    {
-        _value = default;
     }
 
     public void AddCallback(Func<T, Task> callback)

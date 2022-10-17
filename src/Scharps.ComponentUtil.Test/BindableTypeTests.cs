@@ -77,4 +77,20 @@ public class BindableTypeTests
     {
         public BindableType<T> value;
     }
+
+    [Fact]
+    public async Task Assigning_Same_Value_Does_Not_Invoke_Callbacks()
+    {
+        var handlerCalled = false;
+        BindableType<ConsoleKey> consoleKey = new(ConsoleKey.A);
+        Func<ConsoleKey, Task> handler = key =>
+        {
+            handlerCalled = true;
+            return Task.CompletedTask;
+        };
+        consoleKey += handler;
+        await consoleKey.Mutate(ConsoleKey.A);
+
+        handlerCalled.Should().BeFalse();
+    }
 }

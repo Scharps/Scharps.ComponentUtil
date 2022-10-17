@@ -26,6 +26,9 @@ public struct BindableType<T>
 
     public Task Mutate(T newValue)
     {
+        if (newValue is null) throw new ArgumentException(nameof(newValue));
+
+        if (newValue.Equals(_value)) return Task.CompletedTask;
         _value = newValue;
         return Task.WhenAll(_callbacks.Select(c => c.Invoke(newValue)));
     }

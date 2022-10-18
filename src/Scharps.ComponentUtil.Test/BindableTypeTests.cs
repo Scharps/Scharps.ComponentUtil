@@ -75,7 +75,7 @@ public class BindableTypeTests
 
     private class ObjectContainingBindableType<T>
     {
-        public BindableType<T> value;
+        public BindableType<T> value = new();
     }
 
     [Fact]

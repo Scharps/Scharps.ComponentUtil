@@ -1,10 +1,10 @@
 ﻿namespace Scharps.ComponentUtil;
-public struct BindableType<T>
+public class BindableType<T>
 {
     private List<Func<T, Task>> _callbacks = new();
-    private T? _value = default;
+    private T? _value;
 
-    public BindableType(T value)
+    public BindableType(T value = default!)
     {
         _value = value;
     }
